@@ -39,6 +39,7 @@ class CategoryController extends Controller
     public function store(CategoryRequest $request)
     {
         //
+
         Category::create($request->validated());
         return redirect()->route('categories.index')->with('success','Category saved');
     }
@@ -52,6 +53,8 @@ class CategoryController extends Controller
     public function show(Category $category)
     {
         //
+        $category->load('products');
+        return response()->json($category, 200);
     }
 
     /**
